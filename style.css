@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#location-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 217, 255, 0.76),rgb(18, 69, 145) );
+    font-family: sans-serif;
+    color: white;
+}
+#weather-img{
+    height: 150px;
+    width: 150px;
+    align-self: center;
+}
+.card{
+    background-color: rgba(212, 211, 211, 0.315);
+    font-size: large;
+    border: none;
+
+}
+#weather-items{
+    --bs-list-group-bg: rgba(38, 0, 255, 0.103);
+}
