@@ -7,9 +7,10 @@ const maxTemp = document.getElementById('max-temp');
 const minTemp = document.getElementById('min-temp');
 const humidity =  document.getElementById('humidity');
 const currentTemp = document.getElementById('current-temp');
+const locationText = document.getElementById('location');
 
 const houstonLonLat = [-95.358421, 29.749907];
-const dallasLonLat = [ -96.808891, 32.779167];
+const atlantaLonLat = [ -84.386330, 33.753746];
 const apiKey = 'ee759a30a9b8bfdc78fd32c59d9d8abc';
 
 
@@ -28,12 +29,13 @@ async function getWeather(longLat) {
     try {
         const weatherPromise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${longLat[1]}&lon=${longLat[0]}&appid=${apiKey}`);
         const weatherData = await weatherPromise.json();
-        currentTemp.textContent = `Current: ${kelvinToFahr(weatherData.main.temp)}°`;
+        currentTemp.textContent = `Current: ${kelvinToFahr(weatherData.main.temp)}°F`;
         weatherDes.textContent = weatherData.weather[0].description.toUpperCase();
         weatherImg.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
-        maxTemp.textContent = `High: ${kelvinToFahr(weatherData.main.temp_max)}°`;
-        minTemp.textContent = `Low: ${kelvinToFahr(weatherData.main.temp_min)}°`;
+        maxTemp.textContent = `High: ${kelvinToFahr(weatherData.main.temp_max)}°F`;
+        minTemp.textContent = `Low: ${kelvinToFahr(weatherData.main.temp_min)}°F`;
         humidity.textContent = `Humidity: ${weatherData.main.humidity}%`;
+        locationText.textContent = weatherData.name;
         console.log(weatherData);
     } catch (error) {
         console.log(error)
@@ -50,7 +52,7 @@ houstonButton.addEventListener('click', (e) => {
 })
 
 dallasButton.addEventListener('click', (e) => {
-    getWeather(dallasLonLat);
+    getWeather(atlantaLonLat);
     getRandomQuote();
     weatherImg.scr = `http://openweathermap.org/img/wn/04d@2x.png`;
 })

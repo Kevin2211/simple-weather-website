@@ -34,3 +34,7 @@ body{
 #weather-items{
     --bs-list-group-bg: rgba(38, 0, 255, 0.103);
 }
+#location{
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.658);
+}
