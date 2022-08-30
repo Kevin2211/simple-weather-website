@@ -38,3 +38,6 @@ body{
     font-size: 15px;
     color: rgba(255, 255, 255, 0.658);
 }
+.location-input{
+    width: 400px;
+}

@@ -8,11 +8,11 @@ const minTemp = document.getElementById('min-temp');
 const humidity =  document.getElementById('humidity');
 const currentTemp = document.getElementById('current-temp');
 const locationText = document.getElementById('location');
+const locationInput = document.getElementById('search-location');
 
 const houstonLonLat = [-95.358421, 29.749907];
-const atlantaLonLat = [ -84.386330, 33.753746];
 const apiKey = 'ee759a30a9b8bfdc78fd32c59d9d8abc';
-
+const lngLatSearch = [];
 
 async function getRandomQuote(){
     try {
@@ -35,8 +35,6 @@ async function getWeather(longLat) {
         maxTemp.textContent = `High: ${kelvinToFahr(weatherData.main.temp_max)}°F`;
         minTemp.textContent = `Low: ${kelvinToFahr(weatherData.main.temp_min)}°F`;
         humidity.textContent = `Humidity: ${weatherData.main.humidity}%`;
-        locationText.textContent = weatherData.name;
-        console.log(weatherData);
     } catch (error) {
         console.log(error)
     }
@@ -46,29 +44,28 @@ function kelvinToFahr(temp){
     return Math.floor(1.8*(temp-273)+32);
 }
 
-houstonButton.addEventListener('click', (e) => {
-    getWeather(houstonLonLat);
-    getRandomQuote();
-})
-
-dallasButton.addEventListener('click', (e) => {
-    getWeather(atlantaLonLat);
-    getRandomQuote();
-    weatherImg.scr = `http://openweathermap.org/img/wn/04d@2x.png`;
-})
-
-
 window.addEventListener('DOMContentLoaded', (e) => {
     getWeather(houstonLonLat);
     getRandomQuote();
 })
 
+function initMap(){
 
-// class weather {
-//     constructor(description, highestTemp, lowestTemp, humidityLevel){
-//         this.description = description;
-//         this.highestTemp = highestTemp;
-//         this.lowestTemp = lowestTemp;
-//         this.humidityLevel = humidityLevel;
-//     }
-// }
+    autocomplete = new  google.maps.places.Autocomplete(locationInput, 
+    {
+        componentRestrictions: {'country': ['us']},
+        fields: ['geometry', 'name'],
+        types: ['geocode']
+    })
+
+    autocomplete.addListener('place_changed', () => {
+        const location = autocomplete.getPlace();
+        lngLatSearch[0] = location.geometry.location.lng();
+        lngLatSearch[1] = location.geometry.location.lat();
+        locationText.textContent = location.name;
+        getWeather(lngLatSearch);
+    })
+}
+initMap();
+
+

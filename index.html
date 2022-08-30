@@ -9,16 +9,17 @@
     <title>Document</title>
 </head>
 <body>
+
     <div class="container">
-        <div class="container" id="location-buttons">
-            <button type="button" id="houston-button" class="btn btn-primary btn-lg">Houston, TX</button>
-            <button type="button" id="dallas-button" class="btn btn-primary btn-lg">Atlanta, GA</button>
+        <div class="input-group mb-3 location-input">
+            <span class="input-group-text" id="basic-addon1">Search</span>
+            <input type="text"  id="search-location"class="form-control" placeholder="Type a location">
         </div>
         <div class="card" style="width: 25rem;">
             <img src='sdfg' id="weather-img" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title" id="weather-des">Sunny</h5>
-              <p class="card-text" id="location">asdfasdfsfd </p>
+              <p class="card-text" id="location"> </p>
               <p class="card-text" id="daily-quote">Quote of the day: </p>
             </div>
             <ul class="list-group list-group-flush" id="weather-items">
@@ -34,7 +35,11 @@
 
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiJ2HXj6DPZm5N5P69EAMDvWvOIW9zFQY&libraries=places&callback=initMap">
+</script>
     <script src="script.js"></script>
 </body>
 </html>
