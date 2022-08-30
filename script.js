@@ -45,16 +45,25 @@ function kelvinToFahr(temp){
 }
 
 window.addEventListener('DOMContentLoaded', (e) => {
-    getWeather(houstonLonLat);
-    getRandomQuote();
-})
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition((loc) => {
+            lngLatSearch[0] = loc.coords.longitude;
+            lngLatSearch[1] = loc.coords.latitude;
+            getWeather(lngLatSearch);
+        })
+    }else{
+        lngLatSearch[0] = -95.358421;
+        lngLatSearch[1] = 29.749907;
+    }
+    
+});
 
 function initMap(){
 
     autocomplete = new  google.maps.places.Autocomplete(locationInput, 
     {
         componentRestrictions: {'country': ['us']},
-        fields: ['geometry', 'name'],
+        fields: ['geometry','name','address_components'],
         types: ['geocode']
     })
 
@@ -62,7 +71,8 @@ function initMap(){
         const location = autocomplete.getPlace();
         lngLatSearch[0] = location.geometry.location.lng();
         lngLatSearch[1] = location.geometry.location.lat();
-        locationText.textContent = location.name;
+        locationText.textContent = location.address_components[3].short_name +", " + location.address_components[5].short_name;
+        console.log(location);
         getWeather(lngLatSearch);
     })
 }
